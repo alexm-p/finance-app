@@ -1,0 +1,57 @@
+# ── Python ──────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+venv/
+.venv/
+env/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+
+# ── Environment & secrets ────────────────────────────
+.env
+.env.*
+*.key
+secrets.yaml
+
+# ── Flutter / Dart ───────────────────────────────────
+build/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+*.g.dart
+pubspec.lock
+
+# ── iOS ─────────────────────────────────────────────
+flutter_app/ios/Pods/
+flutter_app/ios/.symlinks/
+flutter_app/ios/Flutter/Flutter.framework
+flutter_app/ios/Flutter/Flutter.podspec
+*.xcworkspace
+*.xcuserdata/
+DerivedData/
+
+# ── Android ─────────────────────────────────────────
+flutter_app/android/.gradle/
+flutter_app/android/captures/
+flutter_app/android/local.properties
+flutter_app/android/key.properties
+*.jks
+*.keystore
+
+# ── Windows ──────────────────────────────────────────
+flutter_app/windows/flutter/generated_plugin_registrant.cpp
+flutter_app/windows/flutter/generated_plugin_registrant.h
+flutter_app/windows/flutter/generated_plugins.cmake
+
+# ── IDEs ─────────────────────────────────────────────
+.idea/
+.vscode/settings.json
+*.iml
+.DS_Store
+Thumbs.db
