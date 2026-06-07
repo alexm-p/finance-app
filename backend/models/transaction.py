@@ -30,11 +30,13 @@ class Transaction(Base):
 
     # Foreign key links to the categories table.
     # nullable=True means uncategorised transactions are allowed.
-    category_id = Column(Integer, ForeignKey("categories.id"), nullable=True)
+    # Commented out for now since we haven't implemented categories yet, but this is how you'd set it up:
+    #category_id = Column(Integer, ForeignKey("categories.id"), nullable=True)
 
     # relationship() lets you do transaction.category to get the full
     # Category object, rather than just the raw integer ID.
-    category = relationship("Category", back_populates="transactions")
+    # Commented out for now since we haven't implemented categories yet, but this is how you'd set it up:
+    #category = relationship("Category", back_populates="transactions")
 
     def __repr__(self):
         return f"<Transaction {self.merchant} £{self.amount} on {self.date}>"

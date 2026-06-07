@@ -8,12 +8,12 @@
 
 import 'package:flutter/material.dart';
 
-class _Placeholder extends StatelessWidget {
+class Placeholder extends StatelessWidget {
   final IconData icon;
   final String label;
   final String hint;
 
-  const _Placeholder({
+  const Placeholder({
     required this.icon,
     required this.label,
     required this.hint,

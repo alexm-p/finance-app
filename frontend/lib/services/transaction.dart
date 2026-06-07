@@ -1,21 +1,65 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-import '../models/transaction.dart';
-
-class TransactionService {
-  // Use 10.0.2.2 for Android emulator (it maps to your machine's localhost)
-  // Use localhost for iOS simulator or web
-  static const String _base = 'http://10.0.2.2:8000';
-
-  Future<List<Transaction>> getTransactions({int skip = 0, int limit = 50}) async {
-    final uri = Uri.parse('$_base/transactions/?skip=$skip&limit=$limit');
-    final response = await http.get(uri);
-
-    if (response.statusCode == 200) {
-      final List<dynamic> data = jsonDecode(response.body);
-      return data.map((json) => Transaction.fromJson(json)).toList();
-    } else {
-      throw Exception('Failed to load transactions: ${response.statusCode}');
-    }
+// lib/models/transaction.dart
+// ─────────────────────────────────────────────────────
+// Mirrors the Pydantic schemas in schemas/transaction.py.
+// TransactionSummary is used in list views (lighter).
+// Transaction is used when viewing a single item in full.
+// ─────────────────────────────────────────────────────
+ 
+class Transaction {
+  final int id;
+  final double amount;
+  final String merchant;
+  final String? description;
+  final DateTime date;
+  final String source;
+  final int? categoryId;
+  final DateTime createdAt;
+ 
+  const Transaction({
+    required this.id,
+    required this.amount,
+    required this.merchant,
+    this.description,
+    required this.date,
+    required this.source,
+    this.categoryId,
+    required this.createdAt,
+  });
+ 
+  // Whether this is money going out
+  bool get isExpense => amount < 0;
+ 
+  // Formatted amount string e.g. "-£12.50" or "+£500.00"
+  String get formattedAmount {
+    final abs = amount.abs().toStringAsFixed(2);
+    return isExpense ? '-£$abs' : '+£$abs';
   }
+ 
+  // First letter of merchant, uppercased — used in avatar
+  String get initial => merchant.isNotEmpty ? merchant[0].toUpperCase() : '?';
+ 
+  factory Transaction.fromJson(Map<String, dynamic> json) {
+    return Transaction(
+      id: json['id'] as int,
+      // API may return int or double — (num) cast handles both safely
+      amount: (json['amount'] as num).toDouble(),
+      merchant: json['merchant'] as String,
+      description: json['description'] as String?,
+      date: DateTime.parse(json['date'] as String),
+      source: json['source'] as String? ?? 'manual',
+      categoryId: json['category_id'] as int?,
+      createdAt: DateTime.parse(json['created_at'] as String),
+    );
+  }
+ 
+  Map<String, dynamic> toJson() => {
+        'amount': amount,
+        'merchant': merchant,
+        'description': description,
+        'date': date.toIso8601String(),
+        'source': source,
+        'category_id': categoryId,
+      };
 }
+ 
+ 
