@@ -70,7 +70,9 @@ class Transaction {
 
       categoryId:  json['category_id'] as int?,
 
-      createdAt:   DateTime.parse(json['created_at'] as String),
+      createdAt:   json['created_at'] != null 
+                     ? DateTime.parse(json['created_at'] as String)
+                     : DateTime.now(),
 
     );
 

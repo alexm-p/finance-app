@@ -54,18 +54,14 @@ def get_transaction(transaction_id: int, db: Session = Depends(get_db)):
 
 @router.post("/", response_model=TransactionResponse, status_code=201)
 def create_transaction(payload: TransactionCreate, db: Session = Depends(get_db)):
-    """
-    Manually add a transaction (e.g. cash purchase not in bank feed).
-    Calls the categoriser service to guess the category automatically.
-    """
-    # Ask the categoriser service to suggest a category
-    # based on the merchant name — keeps this logic out of the router
-    category_id = auto_categorise(payload.merchant) if not payload.category_id else payload.category_id
-
-    transaction = Transaction(**payload.model_dump(), category_id=category_id)
+    data = payload.model_dump()
+    if not data.get("category_id"):
+        data["category_id"] = auto_categorise(data["merchant"])
+    
+    transaction = Transaction(**data)
     db.add(transaction)
     db.commit()
-    db.refresh(transaction)  # re-reads from DB so we get the generated id + created_at
+    db.refresh(transaction)
     return transaction
 
 
