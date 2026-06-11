@@ -13,7 +13,7 @@ class Placeholder extends StatelessWidget {
   final String label;
   final String hint;
 
-  const Placeholder({
+  const Placeholder({super.key, 
     required this.icon,
     required this.label,
     required this.hint,

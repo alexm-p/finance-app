@@ -1,5 +1,5 @@
 # models/transaction.py
-from sqlalchemy import Column, Integer, Float, String, DateTime
+from sqlalchemy import Column, Integer, Float, String, DateTime, ForeignKey
 from datetime import datetime
 from database import Base
 
@@ -13,6 +13,7 @@ class Transaction(Base):
     description = Column(String, nullable=True)
     date        = Column(DateTime, nullable=False)
     source      = Column(String, nullable=False)
+    scheduled_payment_id = Column(Integer, ForeignKey("scheduled_payments.id"), nullable=True)
     category_id = Column(Integer, nullable=True)
     created_at  = Column(DateTime, default=datetime.utcnow)
 

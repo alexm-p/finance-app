@@ -10,8 +10,7 @@ import 'package:http/http.dart' as http;
 import '../models/transaction.dart';
 
 class TransactionService {
-  // 10.0.2.2 maps to your machine's localhost on Android emulator.
-  // Change to 'localhost' for iOS simulator or web.
+  
   static const String _base = 'http://localhost:8000';
 
   // GET /transactions/ — paginated, newest first
