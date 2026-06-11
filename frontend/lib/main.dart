@@ -6,7 +6,7 @@ import 'screens/transactions_screen.dart';
 
 import 'screens/income_screen.dart';
 
-import 'screens/subscriptions_screen.dart';
+import 'screens/scheduled_payment_screen.dart';
 
 import 'screens/saving_goals_screen.dart';
  
@@ -90,7 +90,7 @@ class _AppShellState extends State<AppShell> {
 
     IncomeScreen(),
 
-    SubscriptionsScreen(),
+    ScheduledPaymentScreen(),
 
     SavingGoalsScreen(),
 
@@ -156,7 +156,7 @@ class _AppShellState extends State<AppShell> {
 
             selectedIcon: Icon(Icons.autorenew),
 
-            label: 'Subscriptions',
+            label: 'Scheduled Payments',
 
           ),
 
