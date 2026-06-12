@@ -5,11 +5,13 @@ class ScheduledPayment {
   final String frequency;
   final DateTime nextDue;
   final int? categoryId;
+  final String? merchant;
   final bool isActive;
 
   ScheduledPayment({
     required this.id,
     required this.name,
+    required this.merchant,
     required this.amount,
     required this.frequency,
     required this.nextDue,
@@ -28,13 +30,14 @@ class ScheduledPayment {
 
   factory ScheduledPayment.fromJson(Map<String, dynamic> json) {
     return ScheduledPayment(
-      id: json['id'],
-      name: json['name'],
-      amount: json['amount'].toDouble(),
-      frequency: json['frequency'],
-      nextDue: DateTime.parse(json['next_due']),
-      categoryId: json['category_id'],
-      isActive: json['is_active'],
+      id:         json['id'],
+      name:       json['name'],
+      amount:     (json['amount'] as num).toDouble(),
+      merchant:   json['merchant'] as String? ?? '',
+      frequency:  json['frequency'],
+      nextDue:    DateTime.parse(json['next_due']),
+      categoryId: json['category_id'] as int?,
+      isActive:   json['is_active'] as bool? ?? true,
     );
   }
 }

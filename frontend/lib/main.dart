@@ -88,8 +88,6 @@ class _AppShellState extends State<AppShell> {
 
     TransactionsScreen(),
 
-    IncomeScreen(),
-
     ScheduledPaymentScreen(),
 
     SavingGoalsScreen(),
@@ -137,16 +135,6 @@ class _AppShellState extends State<AppShell> {
             selectedIcon: Icon(Icons.receipt_long),
 
             label: 'Transactions',
-
-          ),
-
-          NavigationDestination(
-
-            icon: Icon(Icons.account_balance_wallet_outlined),
-
-            selectedIcon: Icon(Icons.account_balance_wallet),
-
-            label: 'Income',
 
           ),
 

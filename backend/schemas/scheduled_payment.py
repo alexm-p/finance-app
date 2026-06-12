@@ -4,6 +4,7 @@ from datetime import datetime
 class ScheduledPaymentCreate(BaseModel):
     name: str
     amount: float
+    merchant: str | None = None
     frequency: str
     next_due: datetime
     category_id: int | None
@@ -13,13 +14,14 @@ class ScheduledPaymentCreate(BaseModel):
 class ScheduledPaymentUpdate(BaseModel):
     name: str | None
     amount: float | None
+    merchant: str | None = None
     frequency: str | None
     next_due: datetime | None
     category_id: int | None
     is_active: bool | None
 
     model_config = {"from_attributes": True}
-    
+
 
 class ScheduledPaymentSummary(BaseModel):
     id: int
@@ -27,5 +29,8 @@ class ScheduledPaymentSummary(BaseModel):
     amount: float
     frequency: str
     next_due: datetime
+    merchant: str | None = None
+    category_id: int | None
+    is_active: bool
 
     model_config = {"from_attributes": True}

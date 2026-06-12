@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from database import engine, Base
-from routers import transactions
+from routers import transactions, scheduled_payments
 
 Base.metadata.create_all(bind=engine)
 
@@ -20,6 +20,7 @@ app.add_middleware(
 )
 
 app.include_router(transactions.router)
+app.include_router(scheduled_payments.router)
 
 @app.get("/health")
 def health_check():

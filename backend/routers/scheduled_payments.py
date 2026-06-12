@@ -32,7 +32,7 @@ def get_scheduled_payments(skip: int = 0, limit: int = 50, db: Session = Depends
     """
     return (
         db.query(ScheduledPayment)
-        .order_by(ScheduledPayment.date.desc())
+        .order_by(ScheduledPayment.next_due.desc())
         .offset(skip)
         .limit(limit)
         .all()
