@@ -56,7 +56,7 @@ def get_scheduled_payment(scheduled_payment_id: int, db: Session = Depends(get_d
 def create_scheduled_payment(payload: ScheduledPaymentCreate, db: Session = Depends(get_db)):
     data = payload.model_dump()
     if not data.get("category_id"):
-        data["category_id"] = auto_categorise(data["merchant"])
+        data["category_id"] = auto_categorise(data["name"])
     
     scheduled_payment = ScheduledPayment(**data)
     db.add(scheduled_payment)
