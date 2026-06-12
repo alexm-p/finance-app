@@ -12,7 +12,6 @@ class ScheduledPayment(Base):
     frequency   = Column(String, nullable=False)  # e.g. "weekly", "monthly"
     next_due    = Column(DateTime, nullable=False)
     category_id = Column(Integer, nullable=True)
-    merchant    = Column(String, nullable=True)  # optional, for categorisation
     is_active   = Column(Boolean, default=True)  # 1 for active, 0 for inactive
 
     def __repr__(self):
